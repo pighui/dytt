@@ -8,23 +8,23 @@ import redis
 from dytt.settings import REDIS_PORT, REDIS_HOST
 
 
-def add_url(url):
+def add_url():
     r = redis.Redis(host=REDIS_HOST, port=REDIS_PORT)
-    # url = input("请输入要爬取的网址：\n")
-    r.lpush('movies', url)
-    # print('写入完成')
+    url_list = [
+        'https://www.dy2018.com/html/gndy/dyzz/index.html',
+        'https://www.dy2018.com/html/bikan/',
+        'https://www.dy2018.com/html/gndy/index.html',
+        'https://www.dy2018.com/html/gndy/jddyy/',
+        'https://www.dy2018.com/html/tv/hytv/',
+        'https://www.dy2018.com/html/tv/rihantv/',
+        'https://www.dy2018.com/html/tv/oumeitv/',
+        'https://www.dy2018.com/html/zongyi2013/',
+    ]
+    for url in url_list:
+        r.lpush('movies', url)
+    print("写入完成")
     r.close()
 
 
 if __name__ == '__main__':
-    urls = [
-        'https://www.dy2018.com/html/gndy/dyzz/index.html',
-        'https://www.dy2018.com/html/bikan/',
-        'https://www.dy2018.com/html/gndy/jddyy/',
-        'https://www.dy2018.com/html/tv/hytv/',
-        'https://www.dy2018.com/html/tv/oumeitv/',
-        'https://www.dy2018.com/html/zongyi2013/',
-    ]
-    for url in urls:
-        add_url(url)
-    print('写入完成')
+    add_url()
